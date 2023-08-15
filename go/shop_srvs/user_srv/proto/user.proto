@@ -1,0 +1,70 @@
+syntax = "proto3";  // 使用proto3语法
+
+import "google/protobuf/empty.proto";  // 导入Google提供的Empty类型的proto文件
+// 用于定义返回空消息的RPC方法
+
+option go_package = ".;proto";  // 指定生成go代码的包名
+
+service User {  // 定义一个名为User的服务
+
+  rpc GetUserList (PageInfo) returns (UserListResponse);  // 获取用户列表的RPC方法
+
+  rpc GetUserByMobile (MobileRequest) returns (UserInfoResponse);  // 通过手机号获取用户信息的RPC方法
+
+  rpc GetUserById (IdRequest) returns (UserInfoResponse);  // 通过ID获取用户信息的RPC方法
+
+  rpc CreateUser (CreateUserInfo) returns (UserInfoResponse);  // 创建用户的RPC方法
+
+  rpc UpdateUser (UpdateUserInfo) returns (google.protobuf.Empty);  // 更新用户信息的RPC方法
+
+  rpc CheckPassWord (PasswordCheckInfo) returns (CheckResponse);  // 检查密码的RPC方法
+}
+
+message PasswordCheckInfo {  // 定义一个名为PasswordCheckInfo的消息类型
+  string name = 1;
+  string password = 2;  // 字符串类型字段，用于存储密码// 字符串类型字段，用于存储加密后的密码
+}
+
+message CheckResponse {  // 定义一个名为CheckResponse的消息类型
+  bool success = 1;  // 布尔类型字段，用于表示检查是否成功
+}
+
+message PageInfo {  // 定义一个名为PageInfo的消息类型
+  uint32 pn = 1;  // 无符号32位整数类型字段，用于表示页码
+  uint32 pSize = 2;  // 无符号32位整数类型字段，用于表示每页的大小
+}
+
+message MobileRequest {  // 定义一个名为MobileRequest的消息类型
+  string mobile = 1;  // 字符串类型字段，用于存储手机号
+}
+
+message IdRequest {  // 定义一个名为IdRequest的消息类型
+  int32 id = 1;  // 有符号32位整数类型字段，用于存储ID
+}
+
+message CreateUserInfo {  // 定义一个名为CreateUserInfo的消息类型
+  string Name = 1;  // 字符串类型字段，用于存储昵称
+  string passWord = 2;  // 字符串类型字段，用于存储密码
+  string mobile = 3;  // 字符串类型字段，用于存储手机号
+}
+
+message UpdateUserInfo {  // 定义一个名为UpdateUserInfo的消息类型
+  int32 id = 1;  // 有符号32位整数类型字段，用于存储ID
+  string Name = 2;  // 字符串类型字段，用于存储昵称
+  string gender = 3;  // 字符串类型字段，用于存储性别
+  uint64 birthDay = 4;  // 无符号64位整数类型字段，用于存储生日
+}
+
+message UserInfoResponse {  // 定义一个名为UserInfoResponse的消息类型
+  int32 id = 1;  // 有符号32位整数类型字段，用于存储ID
+  string passWord = 2;  // 字符串类型字段，用于存储密码
+  string mobile = 3;  // 字符串类型字段，用于存储手机号
+  string Name = 4;  // 字符串类型字段，用于存储昵称
+  uint64 birthDay = 5;  // 无符号64位整数类型字段，用于存储生日
+  string gender = 6;  // 字符串类型字段，用于存储性别
+  int32 role = 7;  // 有符号32位整数类型字段，用于存储角色信息
+}
+message UserListResponse {  // 定义一个名为UserListResponse的消息类型
+  int32 total = 1;  // 有符号32位整数类型字段，用于存储总数
+  repeated UserInfoResponse data = 2;  // 重复的UserInfoResponse类型字段，用于存储用户信息列表
+}
