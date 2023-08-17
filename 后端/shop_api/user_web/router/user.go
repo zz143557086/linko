@@ -19,7 +19,7 @@ func InitUserRouter(Router *gin.RouterGroup) {
 		// 在UserRouter中添加一个GET路由，路径为"list"，处理函数为api.GetUserList
 		// 中间件JWTAuth()用于验证JWT，middlewares.IsAdminAuth()用于检查用户权限
 		UserRouter.GET("/list", middlewares.JWTAuth() /*, middlewares.IsAdminAuth()*/, api.GetUserList)
-
+		UserRouter.GET("", middlewares.JWTAuth() /*, middlewares.IsAdminAuth()*/, api.GetUserList)
 		// 在UserRouter中添加一个POST路由，路径为"login"，处理函数为api.PassWordLogin
 		UserRouter.POST("/pwd_login", api.PassWordLogin)
 

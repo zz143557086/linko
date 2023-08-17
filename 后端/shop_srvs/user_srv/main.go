@@ -10,18 +10,17 @@ import (
 	"os"
 	"os/signal"
 	"shop_srvs/user_srv/global"
-	"shop_srvs/user_srv/hander"
+	"shop_srvs/user_srv/handler"
 	"shop_srvs/user_srv/initialize"
 	"shop_srvs/user_srv/proto"
 	"syscall"
 )
 
 func main() {
-	// 数据库初始化
-	initialize.InitDb()
-
 	// 日志初始化
 	initialize.InitLogger()
+	// 数据库初始化
+	initialize.InitDB()
 
 	// 从命令行参数获取 IP 地址和端口号
 	Ip := flag.String("ip", global.ServerHost, "IP地址")
@@ -33,7 +32,7 @@ func main() {
 	server := grpc.NewServer()
 
 	// 注册 gRPC 服务
-	proto.RegisterUserServer(server, &hander.UserServer{})
+	proto.RegisterUserServer(server, &handler.UserServer{})
 
 	// 监听指定的 IP 地址和端口号
 	lis, err := net.Listen("tcp", fmt.Sprintf("%s:%d", *Ip, *Port))
@@ -41,7 +40,9 @@ func main() {
 		panic("监听失败: " + err.Error())
 	}
 	zap.S().Debugf("成功监听到")
-
+	if global.DB == nil {
+		zap.S().Debugf("指针为空")
+	}
 	// 在新的 Goroutine 中启动 gRPC 服务器
 	go func() {
 		err = server.Serve(lis)
@@ -49,18 +50,6 @@ func main() {
 			panic("服务启动失败: " + err.Error())
 		}
 	}()
-
-	/*// 创建健康检查服务器
-	healthServer := health.NewServer()
-	//生成对应的检查对象
-	check := &api.AgentServiceCheck{
-		GRPC:                           fmt.Sprintf("%s:%d", *Ip, *Port),
-		Timeout:                        "5s",
-		Interval:                       "5s",
-		DeregisterCriticalServiceAfter: "15s",
-	}
-	// 注册服务健康检查
-	grpc_health_v1.RegisterHealthServer(server, healthServer)*/
 
 	// 服务注册
 	cfg := api.DefaultConfig()
@@ -71,7 +60,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	zap.S().Debugf("注册健康服务")
+	zap.S().Debugf("注册服务")
 
 	// 生成注册对象
 	registration := new(api.AgentServiceRegistration)

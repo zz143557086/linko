@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-func InitDb() {
+func InitDB() {
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/shop_user_srv?charset=utf8mb4&parseTime=True&loc=Local",
 		global.User, global.Password, global.Host, global.Port)
 
