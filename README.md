@@ -192,34 +192,35 @@ request CustomClaims jwt验证器创建token的结构体
 
 ##### 后台管理系统
 
-![商品列表](image\商品列表.png)
+![商品列表](image/商品列表.png)
 
 
 
-![商品信息](image\商品信息.png)
+![商品信息](image/商品信息.png)
 
 
 
-![分类创建](image\分类创建.png)
+![分类创建](image/分类创建.png)
 
-![订单列表](image\订单列表.png)
+![订单列表](image/订单列表.png)
 
-![订单详情](image\订单详情.png)
+![订单详情](image/订单详情.png)
 
 
 
-![用户留言](image\用户留言.png)
+![用户留言](image/用户留言.png)
 
-![轮播图列表](image\轮播图列表.png)
+![轮播图列表](image/轮播图列表.png)
 
 ##### 在线商城
 
-![首页](image\首页.png)
+![首页](image/首页.png)
 
-![分类获取商品](image\分类获取商品.png)
+![分类获取商品](image/分类获取商品.png)
 
-![购物车png](image\购物车png.png)
+![购物车png](image/购物车png.png)
 
-![订单中心](image\订单中心.png)
+![订单中心](image/订单中心.png)
 
 ![收藏](image/收藏.png)
+
