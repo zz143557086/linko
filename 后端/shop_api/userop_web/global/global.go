@@ -17,11 +17,12 @@ var (
 )
 
 const (
-	ClientPort = 8024
-	ClientHost = "127.0.0.1"
-	ServerName = "userop_srv"
-	ClientName = "userop_web"
-	ConsulHost = "192.168.2.106"
-	ConsulPort = 8500
-	Key        = "ElwvtT$G@ceMdGE@rsBAZc9vOFs9zqO4"
+	ClientPort       = 8024
+	ClientHost       = "127.0.0.1"
+	ServerName       = "userop_srv"
+	ClientName       = "userop_web"
+	ConsulHost       = "192.168.2.106"
+	ConsulPort       = 8500
+	Key              = "ElwvtT$G@ceMdGE@rsBAZc9vOFs9zqO4"
+	GoodsSrvInfoName = "goods_srv"
 )

@@ -14,7 +14,7 @@ import (
 )
 
 type GoodsServer struct {
-	proto.UnimplementedGoodsServer
+	proto.UnimplementedGoodsServer //proto.UnimplementedGoodsServer 的作用是提醒开发者还需要实现 Goods 服务中的方法
 }
 
 func ModelToResponse(goods model.Goods) proto.GoodsInfoResponse {
